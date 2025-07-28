@@ -1,0 +1,12 @@
+DROP DATABASE IF EXISTS goNews;
+CREATE DATABASE goNews;
+
+DROP TABLE IF EXISTS news;
+CREATE TABLE news (
+    id SERIAL PRIMARY KEY,
+    title TEXT NOT NULL,
+    content TEXT NOT NULL,
+    created_at BIGINT DEFAULT 0,
+    published_at BIGINT NOT NULL,
+    link TEXT NOT NULL UNIQUE
+);

@@ -1,0 +1,32 @@
+services:
+  postgres-db:
+    image: postgres:13-alpine
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=goNews
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - pg_data:/var/lib/postgresql/data
+    restart: always
+
+  pgadmin:
+    image: dpage/pgadmin4:7
+    restart: always
+    environment:
+        - PGADMIN_DEFAULT_EMAIL=admin@email.com
+        - PGADMIN_DEFAULT_PASSWORD=password
+        - PGADMIN_LISTEN_PORT=5051
+    ports:
+      - "5051:5051"
+    volumes:  
+      - pgadmin-data:/var/lib/pgadmin  
+    depends_on:  
+      - postgres-db
+  
+volumes:
+  pg_data:
+  pgadmin-data:
