@@ -27,7 +27,6 @@ func New(connstr string) (*DB, error) {
 	if err != nil {
 		log.Fatalf("Unable to connect to database: %v\n", err)
 	}
-	defer conn.Close()
 
 	// Проверка подключения
 	err = conn.Ping(context.Background())

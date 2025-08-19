@@ -41,6 +41,7 @@ func (api *API) news(w http.ResponseWriter, r *http.Request) {
 	n, valErr := strconv.Atoi(s)
 	if valErr != nil {
 		http.Error(w, valErr.Error(), http.StatusUnsupportedMediaType)
+		return
 	}
 	//запрашиваем из БД n новостей
 	news, err := api.db.News(n)
